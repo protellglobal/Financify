@@ -1,40 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js"></script>
-<script>
-  // Your Firebase config
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-  };
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  // Signup function
-  function signUp() {
-    const email = document.getElementById("signupEmail").value;
-    const password = document.getElementById("signupPassword").value;
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(() => alert("Signup successful"))
-      .catch(err => alert(err.message));
-  }
-
-  // Login function
-  function login() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    auth.signInWithEmailAndPassword(email, password)
-      .then(() => alert("Login successful"))
-      .catch(err => alert(err.message));
-  }
-</script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financify - Cloud Accounting & Payroll</title>
+    <title>FinancePro - Cloud Accounting & Payroll Software</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -61,10 +30,7 @@
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
             color: var(--dark);
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: #f9fafb;
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -129,19 +95,6 @@
             color: var(--primary);
         }
         
-        .pricing-link {
-            background: var(--primary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-weight: 500;
-        }
-        
-        .pricing-link:hover {
-            background: #1d4ed8;
-            color: white !important;
-        }
-        
         .auth-buttons {
             display: flex;
             align-items: center;
@@ -183,94 +136,66 @@
             border-color: #1d4ed8;
         }
         
-        .btn-google {
-            background: white;
-            color: #757575;
-            border: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-        
-        .btn-google:hover {
-            background: #f5f5f5;
-        }
-        
-        .btn-google i {
-            margin-right: 10px;
-            color: #4285F4;
-        }
-        
-        .mobile-menu-btn {
+        /* Modal Styles */
+        .modal {
             display: none;
-            background: none;
-            border: none;
-            color: var(--dark);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Main Content */
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            padding: 2rem 0;
-        }
-        
-        .auth-container {
-            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
             background: white;
             border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
         
-        .auth-info {
-            flex: 1;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 3rem;
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .modal-tabs {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .auth-info h2 {
-            font-size: 2rem;
             margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--light-gray);
         }
         
-        .auth-info ul {
-            list-style: none;
-            margin: 1.5rem 0;
+        .modal-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--gray);
+            border-bottom: 3px solid transparent;
         }
         
-        .auth-info ul li {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
+        .modal-tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
         }
         
-        .auth-info ul li i {
-            margin-right: 10px;
-            font-size: 1.2rem;
+        .modal-form {
+            display: none;
         }
         
-        .auth-form {
-            flex: 1;
-            padding: 3rem;
-        }
-        
-        .auth-form h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
+        .modal-form.active {
+            display: block;
         }
         
         .form-group {
@@ -344,46 +269,303 @@
             font-size: 0.9rem;
         }
         
-        .form-footer {
+        .btn-google {
+            background: white;
+            color: #757575;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-google:hover {
+            background: #f5f5f5;
+        }
+        
+        .btn-google i {
+            margin-right: 10px;
+            color: #4285F4;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             text-align: center;
-            margin-top: 1.5rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
             color: var(--gray);
+            margin-bottom: 2rem;
         }
         
-        .form-footer a {
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
             color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
+            margin-bottom: 1.5rem;
         }
         
-        .form-footer a:hover {
-            text-decoration: underline;
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
         }
         
-        /* Toggle between Login and Signup */
-        .form-toggle {
-            display: none;
+        /* Pricing Section */
+        .pricing {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
         }
         
-        #login-form, #signup-form {
-            display: none;
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
         
-        #login-form:target, #signup-form:target {
-            display: block;
+        .pricing-plan {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
         
-        /* Default show login form */
-        #login-form {
-            display: block;
+        .pricing-plan:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .pricing-plan.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.03);
+        }
+        
+        .pricing-plan.popular:hover {
+            transform: scale(1.03) translateY(-5px);
+        }
+        
+        .popular-tag {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 0 0 0 12px;
+        }
+        
+        .plan-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-price {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .price-period {
+            color: var(--gray);
+            margin-left: 0.5rem;
+        }
+        
+        .plan-description {
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .plan-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .plan-features li i {
+            color: var(--success);
+            margin-right: 0.8rem;
+        }
+        
+        .plan-button {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .testimonial-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+        
+        .author-details h4 {
+            margin-bottom: 0.2rem;
+        }
+        
+        .author-details p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-light {
+            background: white;
+            color: var(--primary);
+            border: 2px solid white;
+        }
+        
+        .btn-light:hover {
+            background: transparent;
+            color: white;
         }
         
         /* Footer */
         footer {
             background: var(--dark);
             color: white;
-            padding: 2rem 0 1.5rem;
-            margin-top: auto;
+            padding: 3rem 0 1.5rem;
         }
         
         .footer-content {
@@ -427,13 +609,19 @@
         
         /* Responsive Design */
         @media (max-width: 968px) {
-            .auth-container {
-                flex-direction: column;
+            .pricing-plans {
+                grid-template-columns: 1fr;
                 max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
             }
             
-            .auth-info {
-                padding: 2rem;
+            .pricing-plan.popular {
+                transform: scale(1);
+            }
+            
+            .pricing-plan.popular:hover {
+                transform: translateY(-5px);
             }
         }
         
@@ -457,8 +645,18 @@
                 margin-top: 1rem;
             }
             
-            .auth-form, .auth-info {
-                padding: 2rem;
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons, .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .modal-content {
+                width: 90%;
+                padding: 1.5rem;
             }
         }
         
@@ -467,17 +665,20 @@
                 font-size: 1.5rem;
             }
             
-            .form-options {
+            .price-amount {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-plan {
+                padding: 2rem 1.5rem;
+            }
+            
+            .modal-tabs {
                 flex-direction: column;
-                align-items: flex-start;
             }
             
-            .forgot-password {
-                margin-top: 0.5rem;
-            }
-            
-            .auth-form, .auth-info {
-                padding: 1.5rem;
+            .modal-tab {
+                text-align: center;
             }
         }
     </style>
@@ -493,126 +694,295 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Solutions</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Resources</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#about">About</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="#login-form" class="btn btn-outline">Login</a>
-                    <a href="#signup-form" class="btn btn-primary">Sign Up</a>
+                    <button class="btn btn-outline" id="login-btn">Login</button>
+                    <button class="btn btn-primary" id="signup-btn">Sign Up</button>
                 </div>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
+    <!-- Auth Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">&times;</button>
+            
+            <div class="modal-tabs">
+                <div class="modal-tab active" data-tab="login">Login</div>
+                <div class="modal-tab" data-tab="signup">Sign Up</div>
+            </div>
+            
+            <!-- Login Form -->
+            <form class="modal-form active" id="login-form">
+                <button class="btn btn-google">
+                    <i class="fab fa-google"></i> Sign in with Google
+                </button>
+                
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+            
+            <!-- Signup Form -->
+            <form class="modal-form" id="signup-form">
+                <button class="btn btn-google">
+                    <i class="fab fa-google"></i> Sign up with Google
+                </button>
+                
+                <div class="divider">
+                    <span>or</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <div class="auth-container">
-                <div class="auth-info">
-                    <h2>Streamline Your Financial Operations</h2>
-                    <p>Join thousands of businesses using FinancePro for their accounting and payroll needs.</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Automated payroll processing</li>
-                        <li><i class="fas fa-check-circle"></i> Real-time financial reporting</li>
-                        <li><i class="fas fa-check-circle"></i> Tax compliance management</li>
-                        <li><i class="fas fa-check-circle"></i> Secure cloud storage</li>
-                        <li><i class="fas fa-check-circle"></i> Multi-device accessibility</li>
+            <div class="hero-content">
+                <h1>Smart Accounting & Payroll Software</h1>
+                <p>Manage your finances, process payroll, and track expenses with our cloud-based solution. Secure, reliable, and easy to use.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" id="hero-signup-btn">Get Started</button>
+                    <a href="#pricing" class="btn btn-outline">View Pricing</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Powerful Features for Your Business</h2>
+                <p>Everything you need to manage your finances and payroll in one place</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h3>Invoicing & Billing</h3>
+                    <p>Create professional invoices, track payments, and manage client accounts</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-money-check"></i>
+                    <h3>Payroll Processing</h3>
+                    <p>Process payroll automatically, calculate taxes, and generate pay stubs</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Financial Reports</h3>
+                    <p>Generate detailed financial reports and visualize your business performance</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-receipt"></i>
+                    <h3>Expense Tracking</h3>
+                    <p>Track business expenses, categorize spending, and manage receipts</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-taxi"></i>
+                    <h3>Tax Management</h3>
+                    <p>Calculate tax obligations, prepare filings, and stay compliant with regulations</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud Storage</h3>
+                    <p>Secure cloud storage with Gmail integration for easy access to your data</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that works best for your business. All plans include full access to our core accounting features.</p>
+            </div>
+            
+            <div class="pricing-plans">
+                <!-- Starter Plan -->
+                <div class="pricing-plan">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Starter</h3>
+                        <div class="plan-price">
+                            <span class="price-amount">$19</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <p class="plan-description">Perfect for freelancers and small businesses</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Up to 5 employees</li>
+                        <li><i class="fas fa-check"></i> Basic financial reports</li>
+                        <li><i class="fas fa-check"></i> Invoice management</li>
+                        <li><i class="fas fa-check"></i> Expense tracking</li>
+                        <li><i class="fas fa-check"></i> Email support</li>
                     </ul>
-                    <div class="pricing-teaser">
-                        <h3>Transparent Pricing</h3>
-                        <p>Start with our free plan and upgrade as your business grows</p>
+                    <div class="plan-button">
+                        <button class="btn btn-outline plan-signup-btn">Get Started</button>
                     </div>
                 </div>
                 
-                <!-- Login Form -->
-                <div class="auth-form" id="login-form">
-                    <h2>Login to Your Account</h2>
-                    <p>Welcome back! Please enter your details.</p>
-                    
-                    <button class="btn btn-google">
-                        <i class="fab fa-google"></i> Sign in with Google
-                    </button>
-                    
-                    <div class="divider">
-                        <span>or</span>
+                <!-- Professional Plan -->
+                <div class="pricing-plan popular">
+                    <div class="popular-tag">Most Popular</div>
+                    <div class="plan-header">
+                        <h3 class="plan-name">Professional</h3>
+                        <div class="plan-price">
+                            <span class="price-amount">$49</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <p class="plan-description">Ideal for growing businesses</p>
                     </div>
-                    
-                    <form>
-                        <div class="form-group">
-                            <label for="login-email">Email Address</label>
-                            <input type="email" id="login-email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="login-password">Password</label>
-                            <input type="password" id="login-password" placeholder="Enter your password" required>
-                        </div>
-                        <div class="form-options">
-                            <div class="remember-me">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">Remember me</label>
-                            </div>
-                            <a href="#" class="forgot-password">Forgot password?</a>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
-                    </form>
-                    
-                    <div class="form-footer">
-                        <p>Don't have an account? <a href="#signup-form">Sign up</a></p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Up to 20 employees</li>
+                        <li><i class="fas fa-check"></i> Advanced financial reports</li>
+                        <li><i class="fas fa-check"></i> Payroll processing</li>
+                        <li><i class="fas fa-check"></i> Tax calculations</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                    </ul>
+                    <div class="plan-button">
+                        <button class="btn btn-primary plan-signup-btn">Get Started</button>
                     </div>
                 </div>
                 
-                <!-- Signup Form -->
-                <div class="auth-form" id="signup-form">
-                    <h2>Create Your Account</h2>
-                    <p>Join us today! Enter your details to get started.</p>
-                    
-                    <button class="btn btn-google">
-                        <i class="fab fa-google"></i> Sign up with Google
-                    </button>
-                    
-                    <div class="divider">
-                        <span>or</span>
+                <!-- Enterprise Plan -->
+                <div class="pricing-plan">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Enterprise</h3>
+                        <div class="plan-price">
+                            <span class="price-amount">$99</span>
+                            <span class="price-period">/month</span>
+                        </div>
+                        <p class="plan-description">For large organizations with complex needs</p>
                     </div>
-                    
-                    <form>
-                        <div class="form-group">
-                            <label for="signup-name">Full Name</label>
-                            <input type="text" id="signup-name" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-email">Email Address</label>
-                            <input type="email" id="signup-email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-password">Password</label>
-                            <input type="password" id="signup-password" placeholder="Create a password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-confirm">Confirm Password</label>
-                            <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
-                        </div>
-                        <div class="form-options">
-                            <div class="remember-me">
-                                <input type="checkbox" id="terms">
-                                <label for="terms">I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
-                    </form>
-                    
-                    <div class="form-footer">
-                        <p>Already have an account? <a href="#login-form">Log in</a></p>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> Unlimited employees</li>
+                        <li><i class="fas fa-check"></i> Custom reporting</li>
+                        <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                        <li><i class="fas fa-check"></i> API access</li>
+                        <li><i class="fas fa-check"></i> 24/7 phone support</li>
+                    </ul>
+                    <div class="plan-button">
+                        <button class="btn btn-outline plan-signup-btn">Contact Sales</button>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+                <p>Join thousands of satisfied businesses using FinancePro</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "FinancePro has transformed how we manage our finances. The payroll processing alone has saved us 10 hours per week!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SD</div>
+                        <div class="author-details">
+                            <h4>Sarah Johnson</h4>
+                            <p>CFO, TechSolutions Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "The reporting features give us insights we never had before. We've identified cost savings of over 15% since switching to FinancePro."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-details">
+                            <h4>Michael Rodriguez</h4>
+                            <p>Owner, Riverside Cafe</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        "As a small business owner, I needed something easy to use but powerful. FinancePro delivers on both fronts with flying colors."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AL</div>
+                        <div class="author-details">
+                            <h4>Amanda Lee</h4>
+                            <p>Founder, Creative Designs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="about">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Streamline Your Finances?</h2>
+                <p>Join thousands of businesses that use FinancePro to save time and reduce accounting costs.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-light" id="cta-signup-btn">Start Free Trial</button>
+                    <a href="#pricing" class="btn btn-outline-light">View Pricing Plans</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -621,7 +991,7 @@
                 <div class="footer-column">
                     <h3>FinancePro</h3>
                     <ul>
-                        <li><a href="#">About Us</a></li>
+                        <li><a href="#about">About Us</a></li>
                         <li><a href="#">Careers</a></li>
                         <li><a href="#">Press</a></li>
                         <li><a href="#">Contact Us</a></li>
@@ -630,10 +1000,10 @@
                 <div class="footer-column">
                     <h3>Products</h3>
                     <ul>
-                        <li><a href="#">Accounting</a></li>
-                        <li><a href="#">Payroll</a></li>
-                        <li><a href="#">Invoicing</a></li>
-                        <li><a href="#">Reporting</a></li>
+                        <li><a href="#features">Accounting</a></li>
+                        <li><a href="#features">Payroll</a></li>
+                        <li><a href="#features">Invoicing</a></li>
+                        <li><a href="#features">Reporting</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -656,39 +1026,133 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Financify. All rights reserved.</p>
+                <p>&copy; 2023 FinancePro. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple form toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Form validation would be added here in a real application
-            const loginForm = document.querySelector('#login-form form');
-            const signupForm = document.querySelector('#signup-form form');
+        // Auth Modal Functionality
+        const authModal = document.getElementById('auth-modal');
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const heroSignupBtn = document.getElementById('hero-signup-btn');
+        const ctaSignupBtn = document.getElementById('cta-signup-btn');
+        const planSignupBtns = document.querySelectorAll('.plan-signup-btn');
+        const closeModal = document.getElementById('close-modal');
+        const modalTabs = document.querySelectorAll('.modal-tab');
+        const modalForms = document.querySelectorAll('.modal-form');
+        
+        // Open modal with login form
+        loginBtn.addEventListener('click', () => {
+            authModal.style.display = 'flex';
+            switchTab('login');
+        });
+        
+        // Open modal with signup form
+        signupBtn.addEventListener('click', () => {
+            authModal.style.display = 'flex';
+            switchTab('signup');
+        });
+        
+        // Open modal from hero section
+        heroSignupBtn.addEventListener('click', () => {
+            authModal.style.display = 'flex';
+            switchTab('signup');
+        });
+        
+        // Open modal from CTA section
+        ctaSignupBtn.addEventListener('click', () => {
+            authModal.style.display = 'flex';
+            switchTab('signup');
+        });
+        
+        // Open modal from pricing plans
+        planSignupBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                authModal.style.display = 'flex';
+                switchTab('signup');
+            });
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            authModal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.style.display = 'none';
+            }
+        });
+        
+        // Switch between login and signup tabs
+        modalTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.getAttribute('data-tab');
+                switchTab(tabName);
+            });
+        });
+        
+        function switchTab(tabName) {
+            // Update active tab
+            modalTabs.forEach(tab => {
+                if (tab.getAttribute('data-tab') === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
             
-            if (loginForm) {
-                loginForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Login functionality would be implemented here. In a real application, this would connect to your authentication system.');
-                });
+            // Update active form
+            modalForms.forEach(form => {
+                if (form.id === `${tabName}-form`) {
+                    form.classList.add('active');
+                } else {
+                    form.classList.remove('active');
+                }
+            });
+        }
+        
+        // Form submission
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Login functionality would be implemented here. In a real application, this would connect to your authentication system.');
+            authModal.style.display = 'none';
+        });
+        
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Basic validation
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
             }
             
-            if (signupForm) {
-                signupForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Signup functionality would be implemented here. In a real application, this would create a new user account.');
-                });
-            }
-            
-            // Google sign-in buttons
-            const googleButtons = document.querySelectorAll('.btn-google');
-            googleButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('Google authentication would be implemented here. In a real application, this would connect to Google OAuth.');
-                });
+            alert('Signup functionality would be implemented here. In a real application, this would create a new user account.');
+            authModal.style.display = 'none';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Adjust for header height
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
