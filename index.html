@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyB_ZGnEHLFVkpN4ubtzJRQsnbbiOvfKxTI",
+  authDomain: "financify-cbaca.firebaseapp.com",
+  projectId: "financify-cbaca",
+  storageBucket: "financify-cbaca.firebasestorage.app",
+  messagingSenderId: "134343113435",
+  appId: "1:134343113435:web:6a237b901a037b35856afe",
+  measurementId: "G-NSHXVEKWKE"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinancePro - Cloud Accounting & Payroll Software</title>
