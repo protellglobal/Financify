@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financify - Cloud Accounting & Payroll</title>
+    <title>Financify - Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -32,8 +32,6 @@
             color: var(--dark);
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -98,19 +96,6 @@
             color: var(--primary);
         }
         
-        .pricing-link {
-            background: var(--primary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-weight: 500;
-        }
-        
-        .pricing-link:hover {
-            background: #1d4ed8;
-            color: white !important;
-        }
-        
         .auth-buttons {
             display: flex;
             align-items: center;
@@ -129,18 +114,6 @@
             font-size: 1rem;
         }
         
-        .btn-outline {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            background: transparent;
-            margin-right: 1rem;
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
         .btn-primary {
             background: var(--primary);
             color: white;
@@ -152,94 +125,102 @@
             border-color: #1d4ed8;
         }
         
-        .btn-google {
-            background: white;
-            color: #757575;
-            border: 1px solid #ddd;
+        .btn-secondary {
+            background: var(--gray);
+            color: white;
+            border: 2px solid var(--gray);
+        }
+        
+        .btn-secondary:hover {
+            background: #475569;
+            border-color: #475569;
+        }
+        
+        /* Admin Dashboard */
+        .admin-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin-bottom: 1rem;
+            min-height: calc(100vh - 80px);
         }
         
-        .btn-google:hover {
-            background: #f5f5f5;
-        }
-        
-        .btn-google i {
-            margin-right: 10px;
-            color: #4285F4;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--dark);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Main Content */
-        main {
-            flex: 1;
-            display: flex;
-            align-items: center;
+        .admin-sidebar {
+            width: 250px;
+            background: var(--dark);
+            color: white;
             padding: 2rem 0;
         }
         
-        .auth-container {
-            display: flex;
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .admin-sidebar h3 {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary);
         }
         
-        .auth-info {
-            flex: 1;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        
-        .auth-info h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .auth-info ul {
+        .admin-sidebar ul {
             list-style: none;
-            margin: 1.5rem 0;
         }
         
-        .auth-info ul li {
+        .admin-sidebar ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .admin-sidebar ul li a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .admin-sidebar ul li a:hover, 
+        .admin-sidebar ul li a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .admin-sidebar ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .admin-content {
+            flex: 1;
+            padding: 2rem;
+            background: white;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .admin-header h2 {
+            color: var(--dark);
+        }
+        
+        .admin-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .admin-card h3 {
             margin-bottom: 1rem;
+            color: var(--dark);
             display: flex;
             align-items: center;
         }
         
-        .auth-info ul li i {
+        .admin-card h3 i {
             margin-right: 10px;
-            font-size: 1.2rem;
-        }
-        
-        .auth-form {
-            flex: 1;
-            padding: 3rem;
-        }
-        
-        .auth-form h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
+            color: var(--primary);
         }
         
         .form-group {
@@ -253,98 +234,93 @@
             color: var(--dark);
         }
         
-        .form-group input {
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
             width: 100%;
             padding: 0.8rem 1rem;
             border: 1px solid var(--light-gray);
             border-radius: 6px;
             font-size: 1rem;
             transition: border-color 0.3s;
+            font-family: 'Roboto', sans-serif;
         }
         
-        .form-group input:focus {
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus, 
+        .form-group select:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
         
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .remember-me {
-            display: flex;
-            align-items: center;
-        }
-        
-        .remember-me input {
-            margin-right: 0.5rem;
-        }
-        
-        .forgot-password {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-        
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-        }
-        
-        .divider::before, .divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--light-gray);
-        }
-        
-        .divider span {
-            padding: 0 1rem;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .form-footer {
-            text-align: center;
+        .pricing-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
             margin-top: 1.5rem;
-            color: var(--gray);
         }
         
-        .form-footer a {
+        .pricing-plan {
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .pricing-plan:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-plan h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .pricing-plan .price {
+            font-size: 2rem;
+            font-weight: 700;
             color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
+            margin-bottom: 1rem;
         }
         
-        .form-footer a:hover {
-            text-decoration: underline;
+        .pricing-plan ul {
+            list-style: none;
+            margin: 1rem 0;
         }
         
-        /* Toggle between Login and Signup */
-        .form-toggle {
-            display: none;
+        .pricing-plan ul li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
         }
         
-        #login-form, #signup-form {
-            display: none;
+        .pricing-plan ul li i {
+            margin-right: 10px;
+            color: var(--success);
         }
         
-        #login-form:target, #signup-form:target {
-            display: block;
+        .content-preview {
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
         }
         
-        /* Default show login form */
-        #login-form {
-            display: block;
+        .content-preview h4 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--light-gray);
         }
         
         /* Footer */
@@ -352,7 +328,6 @@
             background: var(--dark);
             color: white;
             padding: 2rem 0 1.5rem;
-            margin-top: auto;
         }
         
         .footer-content {
@@ -396,13 +371,33 @@
         
         /* Responsive Design */
         @media (max-width: 968px) {
-            .auth-container {
+            .admin-container {
                 flex-direction: column;
-                max-width: 500px;
             }
             
-            .auth-info {
-                padding: 2rem;
+            .admin-sidebar {
+                width: 100%;
+                padding: 1rem 0;
+            }
+            
+            .admin-sidebar ul {
+                display: flex;
+                overflow-x: auto;
+                padding: 0 1rem;
+            }
+            
+            .admin-sidebar ul li {
+                margin-bottom: 0;
+                margin-right: 1rem;
+            }
+            
+            .admin-sidebar ul li a {
+                padding: 0.5rem 1rem;
+                white-space: nowrap;
+            }
+            
+            .pricing-plans {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -425,10 +420,6 @@
             .auth-buttons {
                 margin-top: 1rem;
             }
-            
-            .auth-form, .auth-info {
-                padding: 2rem;
-            }
         }
         
         @media (max-width: 480px) {
@@ -436,17 +427,17 @@
                 font-size: 1.5rem;
             }
             
-            .form-options {
+            .admin-content {
+                padding: 1rem;
+            }
+            
+            .admin-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
             
-            .forgot-password {
-                margin-top: 0.5rem;
-            }
-            
-            .auth-form, .auth-info {
-                padding: 1.5rem;
+            .admin-header .btn {
+                margin-top: 1rem;
             }
         }
     </style>
@@ -462,126 +453,227 @@
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Solutions</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Resources</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#pricing">Pricing</a></li>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#careers">Careers</a></li>
+                        <li><a href="admin.html" class="active">Admin</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="#login-form" class="btn btn-outline">Login</a>
-                    <a href="#signup-form" class="btn btn-primary">Sign Up</a>
+                    <a href="index.html" class="btn btn-primary">Back to Main Site</a>
                 </div>
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            <div class="auth-container">
-                <div class="auth-info">
-                    <h2>Streamline Your Financial Operations</h2>
-                    <p>Join thousands of businesses using FinancePro for their accounting and payroll needs.</p>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Automated payroll processing</li>
-                        <li><i class="fas fa-check-circle"></i> Real-time financial reporting</li>
-                        <li><i class="fas fa-check-circle"></i> Tax compliance management</li>
-                        <li><i class="fas fa-check-circle"></i> Secure cloud storage</li>
-                        <li><i class="fas fa-check-circle"></i> Multi-device accessibility</li>
-                    </ul>
-                    <div class="pricing-teaser">
-                        <h3>Transparent Pricing</h3>
-                        <p>Start with our free plan and upgrade as your business grows</p>
-                    </div>
+    <!-- Admin Dashboard -->
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="admin-sidebar">
+            <h3>Admin Dashboard</h3>
+            <ul>
+                <li><a href="#pricing" class="active"><i class="fas fa-tags"></i> Pricing</a></li>
+                <li><a href="#about"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="#careers"><i class="fas fa-briefcase"></i> Careers</a></li>
+                <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+                <li><a href="#testimonials"><i class="fas fa-quote-left"></i> Testimonials</a></li>
+                <li><a href="#footer"><i class="fas fa-link"></i> Footer</a></li>
+                <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-content">
+            <!-- Pricing Section -->
+            <div id="pricing">
+                <div class="admin-header">
+                    <h2>Pricing Management</h2>
+                    <button class="btn btn-primary">Save Changes</button>
                 </div>
                 
-                <!-- Login Form -->
-                <div class="auth-form" id="login-form">
-                    <h2>Login to Your Account</h2>
-                    <p>Welcome back! Please enter your details.</p>
+                <div class="admin-card">
+                    <h3><i class="fas fa-tags"></i> Edit Pricing Plans</h3>
+                    <p>Update your pricing plans and features here. Changes will be reflected on the main website.</p>
                     
-                    <button class="btn btn-google">
-                        <i class="fab fa-google"></i> Sign in with Google
-                    </button>
-                    
-                    <div class="divider">
-                        <span>or</span>
-                    </div>
-                    
-                    <form>
-                        <div class="form-group">
-                            <label for="login-email">Email Address</label>
-                            <input type="email" id="login-email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="login-password">Password</label>
-                            <input type="password" id="login-password" placeholder="Enter your password" required>
-                        </div>
-                        <div class="form-options">
-                            <div class="remember-me">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">Remember me</label>
+                    <div class="pricing-plans">
+                        <div class="pricing-plan">
+                            <h4>Basic Plan</h4>
+                            <div class="form-group">
+                                <label>Monthly Price ($)</label>
+                                <input type="number" value="19">
                             </div>
-                            <a href="#" class="forgot-password">Forgot password?</a>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Sign In</button>
-                    </form>
-                    
-                    <div class="form-footer">
-                        <p>Don't have an account? <a href="#signup-form">Sign up</a></p>
-                    </div>
-                </div>
-                
-                <!-- Signup Form -->
-                <div class="auth-form" id="signup-form">
-                    <h2>Create Your Account</h2>
-                    <p>Join us today! Enter your details to get started.</p>
-                    
-                    <button class="btn btn-google">
-                        <i class="fab fa-google"></i> Sign up with Google
-                    </button>
-                    
-                    <div class="divider">
-                        <span>or</span>
-                    </div>
-                    
-                    <form>
-                        <div class="form-group">
-                            <label for="signup-name">Full Name</label>
-                            <input type="text" id="signup-name" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-email">Email Address</label>
-                            <input type="email" id="signup-email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-password">Password</label>
-                            <input type="password" id="signup-password" placeholder="Create a password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="signup-confirm">Confirm Password</label>
-                            <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
-                        </div>
-                        <div class="form-options">
-                            <div class="remember-me">
-                                <input type="checkbox" id="terms">
-                                <label for="terms">I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></label>
+                            <div class="form-group">
+                                <label>Yearly Price ($)</label>
+                                <input type="number" value="190">
+                            </div>
+                            <div class="form-group">
+                                <label>Features (one per line)</label>
+                                <textarea>Up to 5 employees
+Basic reporting
+Email support
+5GB storage</textarea>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
-                    </form>
-                    
-                    <div class="form-footer">
-                        <p>Already have an account? <a href="#login-form">Log in</a></p>
+                        
+                        <div class="pricing-plan">
+                            <h4>Professional Plan</h4>
+                            <div class="form-group">
+                                <label>Monthly Price ($)</label>
+                                <input type="number" value="49">
+                            </div>
+                            <div class="form-group">
+                                <label>Yearly Price ($)</label>
+                                <input type="number" value="490">
+                            </div>
+                            <div class="form-group">
+                                <label>Features (one per line)</label>
+                                <textarea>Up to 20 employees
+Advanced reporting
+Priority support
+20GB storage
+Payroll processing</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="pricing-plan">
+                            <h4>Enterprise Plan</h4>
+                            <div class="form-group">
+                                <label>Monthly Price ($)</label>
+                                <input type="number" value="99">
+                            </div>
+                            <div class="form-group">
+                                <label>Yearly Price ($)</label>
+                                <input type="number" value="990">
+                            </div>
+                            <div class="form-group">
+                                <label>Features (one per line)</label>
+                                <textarea>Unlimited employees
+Custom reporting
+24/7 dedicated support
+100GB storage
+Full feature access
+API access</textarea>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- About Us Section -->
+            <div id="about" style="display: none;">
+                <div class="admin-header">
+                    <h2>About Us Management</h2>
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+                
+                <div class="admin-card">
+                    <h3><i class="fas fa-info-circle"></i> Company Information</h3>
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" value="FinancePro">
+                    </div>
+                    <div class="form-group">
+                        <label>Tagline</label>
+                        <input type="text" value="Simplifying Accounting and Payroll for Businesses">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea>FinancePro is a cloud-based accounting and payroll software designed to help businesses of all sizes manage their finances efficiently. Our mission is to simplify complex financial processes so you can focus on growing your business.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Year Founded</label>
+                        <input type="number" value="2018">
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <h3><i class="fas fa-users"></i> Team Members</h3>
+                    <div class="form-group">
+                        <label>Team Members (JSON format)</label>
+                        <textarea>[
+  {
+    "name": "John Smith",
+    "position": "CEO & Founder",
+    "bio": "John has over 15 years of experience in financial software development."
+  },
+  {
+    "name": "Sarah Johnson",
+    "position": "Chief Financial Officer",
+    "bio": "Sarah is a CPA with expertise in business finance and accounting."
+  },
+  {
+    "name": "Michael Chen",
+    "position": "Lead Developer",
+    "bio": "Michael specializes in cloud-based application architecture."
+  }
+]</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Careers Section -->
+            <div id="careers" style="display: none;">
+                <div class="admin-header">
+                    <h2>Careers Management</h2>
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+                
+                <div class="admin-card">
+                    <h3><i class="fas fa-briefcase"></i> Job Openings</h3>
+                    <div class="form-group">
+                        <label>Active Job Postings (JSON format)</label>
+                        <textarea>[
+  {
+    "title": "Senior Frontend Developer",
+    "department": "Engineering",
+    "location": "Remote",
+    "type": "Full-time",
+    "description": "We are looking for an experienced frontend developer to join our team."
+  },
+  {
+    "title": "Product Manager",
+    "department": "Product",
+    "location": "San Francisco, CA",
+    "type": "Full-time",
+    "description": "Join our product team to help shape the future of FinancePro."
+  },
+  {
+    "title": "Customer Success Specialist",
+    "department": "Customer Success",
+    "location": "Remote",
+    "type": "Full-time",
+    "description": "Help our customers get the most value from our software."
+  }
+]</textarea>
+                    </div>
+                </div>
+                
+                <div class="admin-card">
+                    <h3><i class="fas fa-building"></i> Company Culture</h3>
+                    <div class="form-group">
+                        <label>Culture Description</label>
+                        <textarea>At FinancePro, we believe in creating a supportive and inclusive environment where everyone can thrive. We value innovation, collaboration, and a customer-first approach. Our team is passionate about building products that make a real difference in our customers' businesses.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Benefits (one per line)</label>
+                        <textarea>Competitive salary and equity
+Comprehensive health insurance
+Flexible working hours
+Remote work options
+Professional development budget
+Generous vacation policy</textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Preview -->
+            <div class="content-preview">
+                <h4>Content Preview</h4>
+                <p>Changes will appear here when you save them. This preview shows how your content will look on the main website.</p>
+            </div>
         </div>
-    </main>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -631,34 +723,53 @@
     </footer>
 
     <script>
-        // Simple form toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
-            // Form validation would be added here in a real application
-            const loginForm = document.querySelector('#login-form form');
-            const signupForm = document.querySelector('#signup-form form');
+            // Sidebar navigation
+            const sidebarLinks = document.querySelectorAll('.admin-sidebar a');
+            const contentSections = document.querySelectorAll('.admin-content > div');
             
-            if (loginForm) {
-                loginForm.addEventListener('submit', function(e) {
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    alert('Login functionality would be implemented here. In a real application, this would connect to your authentication system.');
-                });
-            }
-            
-            if (signupForm) {
-                signupForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Signup functionality would be implemented here. In a real application, this would create a new user account.');
-                });
-            }
-            
-            // Google sign-in buttons
-            const googleButtons = document.querySelectorAll('.btn-google');
-            googleButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('Google authentication would be implemented here. In a real application, this would connect to Google OAuth.');
+                    
+                    // Remove active class from all links
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Hide all content sections
+                    contentSections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+                    
+                    // Show the target section
+                    const targetId = this.getAttribute('href').substring(1);
+                    document.getElementById(targetId).style.display = 'block';
                 });
             });
+            
+            // Form save functionality
+            const saveButtons = document.querySelectorAll('.btn-primary');
+            
+            saveButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const sectionTitle = this.closest('.admin-content > div').querySelector('h2').textContent;
+                    alert(`${sectionTitle} saved successfully!`);
+                    
+                    // In a real application, this would send data to a server
+                    // and update the preview section
+                    const previewSection = document.querySelector('.content-preview');
+                    previewSection.innerHTML = `
+                        <h4>Content Preview</h4>
+                        <p><strong>${sectionTitle}</strong> has been updated successfully.</p>
+                        <p>These changes are now live on your website.</p>
+                    `;
+                });
+            });
+            
+            // Initialize the first section as active
+            document.getElementById('pricing').style.display = 'block';
         });
     </script>
 </body>
